@@ -13,10 +13,11 @@ namespace MyUtilits
     public partial class MainForm : Form
     {
         int count = 0;
-
+        Random rnd;
         public MainForm()
         {
             InitializeComponent();
+            rnd = new Random();
         }
 
         private void tsmiExit_Click(object sender, EventArgs e)
@@ -47,6 +48,36 @@ namespace MyUtilits
 
             count = 0;
             lbCount.Text = " ";
+        }
+
+        private void btRandom_Click(object sender, EventArgs e)
+        {
+            int num;
+            num = rnd.Next(Convert.ToInt32(nudMin.Value), Convert.ToInt32(nudMax.Value)+1);
+            lbRandom.Text = num.ToString();
+            if(cbRandom.Checked)
+            {
+                int i=0;
+                while (tbRandom.Text.IndexOf(num.ToString()) != -1)
+                { num = rnd.Next(Convert.ToInt32(nudMin.Value), Convert.ToInt32(nudMax.Value) + 1);
+                  i++;
+                    if (i > 1000) break;
+                }
+                if(i<1000)
+                    tbRandom.AppendText(num + "\n");
+            }        
+            else
+                tbRandom.AppendText(num + "\n");
+        }
+
+        private void btRandomClear_Click(object sender, EventArgs e)
+        {
+            tbRandom.Clear();
+        }
+
+        private void btRandomCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tbRandom.Text);
         }
     }
 }
