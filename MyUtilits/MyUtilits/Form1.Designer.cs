@@ -1,6 +1,6 @@
 ﻿namespace MyUtilits
 {
-    partial class MainForm
+    partial class MyUtils
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ms = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,24 +49,35 @@
             this.btRandomClear = new System.Windows.Forms.Button();
             this.btRandomCopy = new System.Windows.Forms.Button();
             this.cbRandom = new System.Windows.Forms.CheckBox();
-            this.menuStrip1.SuspendLayout();
+            this.tp3 = new System.Windows.Forms.TabPage();
+            this.rtbNotepad = new System.Windows.Forms.RichTextBox();
+            this.tsmiNotepad = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiInsDate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiInsTime = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFail = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFLoad = new System.Windows.Forms.ToolStripMenuItem();
+            this.ms.SuspendLayout();
             this.tc.SuspendLayout();
             this.tp1.SuspendLayout();
             this.tp2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMax)).BeginInit();
+            this.tp3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // ms
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile,
-            this.tsmiAbout});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.tsmiAbout,
+            this.tsmiNotepad});
+            this.ms.Location = new System.Drawing.Point(0, 0);
+            this.ms.Name = "ms";
+            this.ms.Size = new System.Drawing.Size(284, 24);
+            this.ms.TabIndex = 0;
+            this.ms.Text = "menuStrip1";
             // 
             // tsmiFile
             // 
@@ -79,7 +90,7 @@
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(108, 22);
+            this.tsmiExit.Size = new System.Drawing.Size(152, 22);
             this.tsmiExit.Text = "&Выход";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
@@ -94,12 +105,14 @@
             // 
             this.tc.Controls.Add(this.tp1);
             this.tc.Controls.Add(this.tp2);
+            this.tc.Controls.Add(this.tp3);
             this.tc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tc.Location = new System.Drawing.Point(0, 24);
             this.tc.Name = "tc";
             this.tc.SelectedIndex = 0;
             this.tc.Size = new System.Drawing.Size(284, 237);
             this.tc.TabIndex = 1;
+            this.tc.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tc_Selecting);
             // 
             // tp1
             // 
@@ -263,18 +276,99 @@
             this.cbRandom.Text = "Без повторов";
             this.cbRandom.UseVisualStyleBackColor = true;
             // 
-            // MainForm
+            // tp3
+            // 
+            this.tp3.Controls.Add(this.rtbNotepad);
+            this.tp3.Location = new System.Drawing.Point(4, 22);
+            this.tp3.Name = "tp3";
+            this.tp3.Size = new System.Drawing.Size(276, 211);
+            this.tp3.TabIndex = 2;
+            this.tp3.Text = "Блокнод";
+            this.tp3.UseVisualStyleBackColor = true;
+            // 
+            // rtbNotepad
+            // 
+            this.rtbNotepad.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbNotepad.Location = new System.Drawing.Point(0, 0);
+            this.rtbNotepad.Name = "rtbNotepad";
+            this.rtbNotepad.Size = new System.Drawing.Size(276, 211);
+            this.rtbNotepad.TabIndex = 0;
+            this.rtbNotepad.Text = "";
+            // 
+            // tsmiNotepad
+            // 
+            this.tsmiNotepad.BackColor = System.Drawing.Color.Silver;
+            this.tsmiNotepad.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiInsDate,
+            this.tsmiInsTime,
+            this.toolStripMenuItem1,
+            this.tsmiFail});
+            this.tsmiNotepad.Name = "tsmiNotepad";
+            this.tsmiNotepad.Size = new System.Drawing.Size(66, 20);
+            this.tsmiNotepad.Text = "&Блокнод";
+            this.tsmiNotepad.Visible = false;
+            // 
+            // tsmiInsDate
+            // 
+            this.tsmiInsDate.Name = "tsmiInsDate";
+            this.tsmiInsDate.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.D)));
+            this.tsmiInsDate.Size = new System.Drawing.Size(232, 22);
+            this.tsmiInsDate.Text = "Вставить &дату";
+            this.tsmiInsDate.Click += new System.EventHandler(this.tsmiInsDate_Click);
+            // 
+            // tsmiInsTime
+            // 
+            this.tsmiInsTime.Name = "tsmiInsTime";
+            this.tsmiInsTime.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.T)));
+            this.tsmiInsTime.Size = new System.Drawing.Size(232, 22);
+            this.tsmiInsTime.Text = "Вставить &время";
+            this.tsmiInsTime.Click += new System.EventHandler(this.tsmiInsTime_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(156, 6);
+            // 
+            // tsmiFail
+            // 
+            this.tsmiFail.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiFSave,
+            this.tsmiFLoad});
+            this.tsmiFail.Name = "tsmiFail";
+            this.tsmiFail.Size = new System.Drawing.Size(232, 22);
+            this.tsmiFail.Text = "&Файл";
+            // 
+            // tsmiFSave
+            // 
+            this.tsmiFSave.Name = "tsmiFSave";
+            this.tsmiFSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsmiFSave.Size = new System.Drawing.Size(172, 22);
+            this.tsmiFSave.Text = "&Сохранить";
+            this.tsmiFSave.Click += new System.EventHandler(this.tsmiFSave_Click);
+            // 
+            // tsmiFLoad
+            // 
+            this.tsmiFLoad.Name = "tsmiFLoad";
+            this.tsmiFLoad.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.tsmiFLoad.Size = new System.Drawing.Size(172, 22);
+            this.tsmiFLoad.Text = "&Открыть";
+            this.tsmiFLoad.Click += new System.EventHandler(this.tsmiFLoad_Click);
+            // 
+            // MyUtils
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.tc);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "MainForm";
+            this.Controls.Add(this.ms);
+            this.MainMenuStrip = this.ms;
+            this.Name = "MyUtils";
             this.Text = "Мои утилиты";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Load += new System.EventHandler(this.MyUtils_Load);
+            this.ms.ResumeLayout(false);
+            this.ms.PerformLayout();
             this.tc.ResumeLayout(false);
             this.tp1.ResumeLayout(false);
             this.tp1.PerformLayout();
@@ -282,6 +376,7 @@
             this.tp2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMax)).EndInit();
+            this.tp3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,7 +384,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip ms;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
@@ -310,6 +405,15 @@
         private System.Windows.Forms.Button btRandomClear;
         private System.Windows.Forms.Button btRandomCopy;
         private System.Windows.Forms.CheckBox cbRandom;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNotepad;
+        private System.Windows.Forms.ToolStripMenuItem tsmiInsDate;
+        private System.Windows.Forms.ToolStripMenuItem tsmiInsTime;
+        private System.Windows.Forms.TabPage tp3;
+        private System.Windows.Forms.RichTextBox rtbNotepad;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFail;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFSave;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFLoad;
     }
 }
 

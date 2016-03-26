@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace MyUtilits
 {
-    public partial class MainForm : Form
+    public partial class MyUtils : Form
     {
         int count = 0;
         Random rnd;
-        public MainForm()
+        public MyUtils()
         {
             InitializeComponent();
             rnd = new Random();
@@ -53,19 +53,20 @@ namespace MyUtilits
         private void btRandom_Click(object sender, EventArgs e)
         {
             int num;
-            num = rnd.Next(Convert.ToInt32(nudMin.Value), Convert.ToInt32(nudMax.Value)+1);
+            num = rnd.Next(Convert.ToInt32(nudMin.Value), Convert.ToInt32(nudMax.Value) + 1);
             lbRandom.Text = num.ToString();
-            if(cbRandom.Checked)
+            if (cbRandom.Checked)
             {
-                int i=0;
+                int i = 0;
                 while (tbRandom.Text.IndexOf(num.ToString()) != -1)
-                { num = rnd.Next(Convert.ToInt32(nudMin.Value), Convert.ToInt32(nudMax.Value) + 1);
-                  i++;
+                {
+                    num = rnd.Next(Convert.ToInt32(nudMin.Value), Convert.ToInt32(nudMax.Value) + 1);
+                    i++;
                     if (i > 1000) break;
                 }
-                if(i<1000)
+                if (i < 1000)
                     tbRandom.AppendText(num + "\n");
-            }        
+            }
             else
                 tbRandom.AppendText(num + "\n");
         }
@@ -79,5 +80,58 @@ namespace MyUtilits
         {
             Clipboard.SetText(tbRandom.Text);
         }
+
+        private void tc_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (tc.SelectedTab == tp3)
+                tsmiNotepad.Visible = true;
+            else tsmiNotepad.Visible = false;
+        }
+
+        private void tsmiInsDate_Click(object sender, EventArgs e)
+        {
+            rtbNotepad.AppendText(DateTime.Now.ToShortDateString() + " ");
+        }
+
+        private void tsmiInsTime_Click(object sender, EventArgs e)
+        {
+            rtbNotepad.AppendText(DateTime.Now.ToShortTimeString() + " ");
+        }
+
+        private void tsmiFSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                rtbNotepad.SaveFile("notepad.rtf");
+            }
+            catch
+            {
+                MessageBox.Show("Не сохраненео!", "Ошибка");
+            }
+        }
+
+        void LoadNotedap()
+        {
+            try
+            {
+                rtbNotepad.LoadFile("notepad.rtf");
+            }
+            catch
+            {
+                MessageBox.Show("Не открывается!", "Ошибка");
+            }
+        }
+
+        private void tsmiFLoad_Click(object sender, EventArgs e)
+        {
+            LoadNotedap();
+        }
+
+        private void MyUtils_Load(object sender, EventArgs e)
+        {
+            LoadNotedap();
+        }
     }
 }
+   
+
