@@ -15,11 +15,15 @@ namespace MyUtilits
         int count = 0;
         Random rnd;
         char[] sp_char = new char[] { '%', '*', ')', '?', '#', '$', '^', '?', '&', '~', ',', '.', '<', '>', '/', '-', '+','\'',';','"',':','(','_','=','\\','|','@','!' };
+        Dictionary<string, double> metrica;
 
         public MyUtils()
         {
             InitializeComponent();
             rnd = new Random();
+            metrica = new Dictionary<string, double>();
+            
+
         }
 
         private void tsmiExit_Click(object sender, EventArgs e)
@@ -129,16 +133,23 @@ namespace MyUtilits
             LoadNotedap();
         }
 
+        void LoadItemsCb()
+        {
+            cbTo.Items.Clear();
+            //копируем элементы из cbIS в cbTo
+            for (int i = 0; i < cbIs.Items.Count; i++)
+                cbTo.Items.Add(cbIs.Items[i]);
+            cbTo.Text = cbIs.Text;
+        }
+
         private void MyUtils_Load(object sender, EventArgs e)
         {
             LoadNotedap();
+            LoadItemsCb();
             clbPassword.SetItemChecked(0, true);
+           
         }
 
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btGenPassword_Click(object sender, EventArgs e)
         {
@@ -164,6 +175,67 @@ namespace MyUtilits
                 }
                 tbPassword.Text = password;
                 Clipboard.SetText(password);
+            }
+        }
+
+        private void btConvert_Click(object sender, EventArgs e)
+        {
+            double m1 = metrica[cbIs.Text];
+            double m2 = metrica[cbTo.Text];
+            double num =Convert.ToDouble(tbIs.Text);
+            tbTo.Text = (num * m1 / m2).ToString();
+        }
+
+        private void btSwap_Click(object sender, EventArgs e)
+        {
+            string t = cbIs.Text;
+            cbIs.Text = cbTo.Text;
+            cbTo.Text = t;
+        }
+
+        private void cbMetric_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbMetric.Text)
+            {
+                case "длинна":
+                    metrica.Clear();
+                    metrica.Add("мм", 1);
+                    metrica.Add("см", 10);
+                    metrica.Add("дц", 100);
+                    metrica.Add("м", 1000);
+                    metrica.Add("км", 1000000);
+                    metrica.Add("миль", 1609344);
+
+                    cbIs.Items.Clear();
+                    cbIs.Items.Add("мм");
+                    cbIs.Items.Add("см");
+                    cbIs.Items.Add("дц");
+                    cbIs.Items.Add("м");
+                    cbIs.Items.Add("км");
+                    cbIs.Items.Add("миль");
+                    cbIs.Text = cbIs.Items[0].ToString();
+                    LoadItemsCb();
+                    break;
+
+                case "вес":
+                    metrica.Clear();
+                    metrica.Add("гр", 1);
+                    metrica.Add("кг", 1000);
+                    metrica.Add("т", 1000000);
+                    metrica.Add("фунт", 453.6);
+                    metrica.Add("oz", 283);
+
+                    cbIs.Items.Clear();
+                    cbIs.Items.Add("гр");
+                    cbIs.Items.Add("кг");
+                    cbIs.Items.Add("т");
+                    cbIs.Items.Add("фунт");
+                    cbIs.Items.Add("oz");
+                    cbIs.Text = cbIs.Items[0].ToString();
+                    LoadItemsCb();
+                    break;
+                default:
+                    break;
             }
         }
     }
