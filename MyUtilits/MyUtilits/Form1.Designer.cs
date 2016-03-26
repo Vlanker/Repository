@@ -58,6 +58,12 @@
             this.tsmiFail = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFSave = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFLoad = new System.Windows.Forms.ToolStripMenuItem();
+            this.tp4 = new System.Windows.Forms.TabPage();
+            this.clbPassword = new System.Windows.Forms.CheckedListBox();
+            this.nudLengs = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btGenPassword = new System.Windows.Forms.Button();
+            this.tbPassword = new System.Windows.Forms.TextBox();
             this.ms.SuspendLayout();
             this.tc.SuspendLayout();
             this.tp1.SuspendLayout();
@@ -65,6 +71,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMax)).BeginInit();
             this.tp3.SuspendLayout();
+            this.tp4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLengs)).BeginInit();
             this.SuspendLayout();
             // 
             // ms
@@ -106,6 +114,7 @@
             this.tc.Controls.Add(this.tp1);
             this.tc.Controls.Add(this.tp2);
             this.tc.Controls.Add(this.tp3);
+            this.tc.Controls.Add(this.tp4);
             this.tc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tc.Location = new System.Drawing.Point(0, 24);
             this.tc.Name = "tc";
@@ -329,7 +338,7 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(156, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(229, 6);
             // 
             // tsmiFail
             // 
@@ -356,6 +365,79 @@
             this.tsmiFLoad.Text = "&Открыть";
             this.tsmiFLoad.Click += new System.EventHandler(this.tsmiFLoad_Click);
             // 
+            // tp4
+            // 
+            this.tp4.Controls.Add(this.tbPassword);
+            this.tp4.Controls.Add(this.btGenPassword);
+            this.tp4.Controls.Add(this.label1);
+            this.tp4.Controls.Add(this.nudLengs);
+            this.tp4.Controls.Add(this.clbPassword);
+            this.tp4.Location = new System.Drawing.Point(4, 22);
+            this.tp4.Name = "tp4";
+            this.tp4.Size = new System.Drawing.Size(276, 211);
+            this.tp4.TabIndex = 3;
+            this.tp4.Text = "Пароль";
+            this.tp4.UseVisualStyleBackColor = true;
+            // 
+            // clbPassword
+            // 
+            this.clbPassword.CheckOnClick = true;
+            this.clbPassword.Dock = System.Windows.Forms.DockStyle.Top;
+            this.clbPassword.FormattingEnabled = true;
+            this.clbPassword.Items.AddRange(new object[] {
+            "Цифры",
+            "Прописные буквы",
+            "Строчные буквы",
+            "Спец. символы %,*,),?,#,$,^?,&,~"});
+            this.clbPassword.Location = new System.Drawing.Point(0, 0);
+            this.clbPassword.Name = "clbPassword";
+            this.clbPassword.Size = new System.Drawing.Size(276, 64);
+            this.clbPassword.TabIndex = 0;
+            this.clbPassword.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
+            // 
+            // nudLengs
+            // 
+            this.nudLengs.Location = new System.Drawing.Point(87, 71);
+            this.nudLengs.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.nudLengs.Name = "nudLengs";
+            this.nudLengs.Size = new System.Drawing.Size(120, 20);
+            this.nudLengs.TabIndex = 1;
+            this.nudLengs.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 77);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Длина пароля:";
+            // 
+            // btGenPassword
+            // 
+            this.btGenPassword.Location = new System.Drawing.Point(193, 97);
+            this.btGenPassword.Name = "btGenPassword";
+            this.btGenPassword.Size = new System.Drawing.Size(75, 23);
+            this.btGenPassword.TabIndex = 3;
+            this.btGenPassword.Text = "Сгенерироват";
+            this.btGenPassword.UseVisualStyleBackColor = true;
+            this.btGenPassword.Click += new System.EventHandler(this.btGenPassword_Click);
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(8, 126);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(260, 20);
+            this.tbPassword.TabIndex = 4;
+            // 
             // MyUtils
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -377,6 +459,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMax)).EndInit();
             this.tp3.ResumeLayout(false);
+            this.tp4.ResumeLayout(false);
+            this.tp4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLengs)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,6 +499,12 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiFail;
         private System.Windows.Forms.ToolStripMenuItem tsmiFSave;
         private System.Windows.Forms.ToolStripMenuItem tsmiFLoad;
+        private System.Windows.Forms.TabPage tp4;
+        private System.Windows.Forms.CheckedListBox clbPassword;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.Button btGenPassword;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nudLengs;
     }
 }
 
